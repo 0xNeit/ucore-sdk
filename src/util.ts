@@ -1,6 +1,6 @@
 /**
  * @file Utility
- * @desc These methods are helpers for the Venus class.
+ * @desc These methods are helpers for the Ucore class.
  */
 
 import { address, abi } from './constants';
@@ -166,7 +166,7 @@ export function request(options: any) : Promise<any> {
 
 /**
  * Gets the contract address of the named contract. This method supports 
- *     contracts used by the Venus Protocol.
+ *     contracts used by the Ucore Protocol.
  *
  * @param {string} contract The name of the contract.
  * @param {string} [network] Optional name of the Ethereum network. Main net and
@@ -176,7 +176,7 @@ export function request(options: any) : Promise<any> {
  *
  * @example
  * ```
- * console.log('vBNB Address: ', Venus.util.getAddress(Venus.vBNB));
+ * console.log('vBNB Address: ', Ucore.util.getAddress(Ucore.vBNB));
  * ```
  */
 export function getAddress(contract: string, network='mainnet') : string {
@@ -185,7 +185,7 @@ export function getAddress(contract: string, network='mainnet') : string {
 
 /**
  * Gets a contract ABI as a JavaScript array. This method supports 
- *     contracts used by the Venus Protocol.
+ *     contracts used by the Ucore Protocol.
  *
  * @param {string} contract The name of the contract.
  *
@@ -193,7 +193,7 @@ export function getAddress(contract: string, network='mainnet') : string {
  *
  * @example
  * ```
- * console.log('vBNB ABI: ', Venus.util.getAbi(Venus.vBNB));
+ * console.log('vBNB ABI: ', Ucore.util.getAbi(Ucore.vBNB));
  * ```
  */
 export function getAbi(contract: string): AbiType[] {
@@ -209,7 +209,7 @@ export function getAbi(contract: string): AbiType[] {
  *
  * @example
  * ```
- * console.log('testnet : ', Venus.util.getNetNameWithChainId(97));
+ * console.log('testnet : ', Ucore.util.getNetNameWithChainId(97));
  * ```
  */
 export function getNetNameWithChainId(chainId: number) : string {

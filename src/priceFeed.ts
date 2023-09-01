@@ -63,7 +63,7 @@ async function vTokenExchangeRate(
 }
 
 /**
- * Gets an asset's price from the Venus Protocol open price feed. The price
+ * Gets an asset's price from the Ucore Protocol open price feed. The price
  *    of the asset can be returned in any other supported asset value, including
  *    all vTokens and underlyings.
  *
@@ -76,15 +76,15 @@ async function vTokenExchangeRate(
  *
  * @example
  * ```
- * const venus = new Venus(window.ethereum);
+ * const ucore = new Ucore(window.ethereum);
  * let price;
  * 
  * (async function () {
  * 
- *   price = await venus.getPrice(Venus.CORE);
+ *   price = await ucore.getPrice(Ucore.CORE);
  *   console.log('CORE in USD', price);
  * 
- *   price = await venus.getPrice(Venus.SXP, Venus.USDC); // supports vTokens too
+ *   price = await ucore.getPrice(Ucore.SXP, Ucore.USDC); // supports vTokens too
  *   console.log('SXP in USDC', price);
  * 
  * })().catch(console.error);
@@ -95,7 +95,7 @@ export async function getPrice(
   inAsset: string = constants.USDC
 ) : Promise<number> {
   await netId(this);
-  const errorPrefix = 'Venus [getPrice] | ';
+  const errorPrefix = 'Ucore [getPrice] | ';
 
   const [
     // eslint-disable-next-line @typescript-eslint/no-unused-vars

@@ -29,7 +29,7 @@ export default [{
       browser: true,
     }),
     commonjs({
-      namedExports: { Ucore: ['Ucore'] },
+      namedExports: { Ucore: ['UCORE'] },
     }),
     minify({ comments: false }),
     json(),

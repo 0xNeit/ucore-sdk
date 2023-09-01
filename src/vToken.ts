@@ -14,7 +14,7 @@ import { BigNumber } from '@ethersproject/bignumber/lib/bignumber';
 import { CallOptions, TrxResponse } from './types';
 
 /**
- * Supplies the user's Binance Smart Chain asset to the Venus Protocol.
+ * Supplies the user's Binance Smart Chain asset to the Ucore Protocol.
  *
  * @param {string} asset A string of the asset to supply.
  * @param {number | string | BigNumber} amount A string, number, or BigNumber
@@ -33,15 +33,15 @@ import { CallOptions, TrxResponse } from './types';
  * @example
  *
  * ```
- * const venus = new Venus(window.ethereum);
+ * const ucore = new Ucore(window.ethereum);
  *
  * // Ethers.js overrides are an optional 3rd parameter for `supply`
  * // const trxOptions = { gasLimit: 250000, mantissa: false };
  * 
  * (async function() {
  * 
- *   console.log('Supplying SXP to the Venus Protocol...');
- *   const trx = await venus.supply(Venus.SXP, 1);
+ *   console.log('Supplying SXP to the Ucore Protocol...');
+ *   const trx = await ucore.supply(Ucore.SXP, 1);
  *   console.log('Ethers.js transaction object', trx);
  * 
  * })().catch(console.error);
@@ -54,7 +54,7 @@ export async function supply(
   options: CallOptions = {}
 ) : Promise<TrxResponse> {
   await netId(this);
-  const errorPrefix = 'Venus [supply] | ';
+  const errorPrefix = 'Ucore [supply] | ';
 
   const vTokenName = 'v' + asset;
   const vTokenAddress = address[this._network.name][vTokenName];
@@ -127,7 +127,7 @@ export async function supply(
 }
 
 /**
- * Redeems the user's Binance Smart Chain asset from the Venus Protocol.
+ * Redeems the user's Binance Smart Chain asset from the Ucore Protocol.
  *
  * @param {string} asset A string of the asset to redeem, or its vToken name.
  * @param {number | string | BigNumber} amount A string, number, or BigNumber
@@ -144,12 +144,12 @@ export async function supply(
  * @example
  *
  * ```
- * const venus = new Venus(window.ethereum);
+ * const ucore = new Ucore(window.ethereum);
  * 
  * (async function() {
  * 
  *   console.log('Redeeming SXP...');
- *   const trx = await venus.redeem(Venus.SXP, 1); // also accepts vToken args
+ *   const trx = await ucore.redeem(Ucore.SXP, 1); // also accepts vToken args
  *   console.log('Ethers.js transaction object', trx);
  * 
  * })().catch(console.error);
@@ -161,7 +161,7 @@ export async function redeem(
   options: CallOptions = {}
 ): Promise<TrxResponse> {
   await netId(this);
-  const errorPrefix = 'Venus [redeem] | ';
+  const errorPrefix = 'Ucore [redeem] | ';
 
   if (typeof asset !== 'string' || asset.length < 1) {
     throw Error(errorPrefix + 'Argument `asset` must be a non-empty string.');
@@ -205,7 +205,7 @@ export async function redeem(
 }
 
 /**
- * Borrows an Binance Smart Chain asset from the Venus Protocol for the user.
+ * Borrows an Binance Smart Chain asset from the Ucore Protocol for the user.
  *     The user's address must first have supplied collateral and entered a 
  *     corresponding market.
  *
@@ -224,7 +224,7 @@ export async function redeem(
  * @example
  *
  * ```
- * const venus = new Venus(window.ethereum);
+ * const ucore = new Ucore(window.ethereum);
  * 
  * (async function() {
  * 
@@ -232,7 +232,7 @@ export async function redeem(
  *   const trxOptions = { mantissa: true };
  * 
  *   console.log('Borrowing 32 SXP...');
- *   const trx = await venus.borrow(Venus.SXP, sxpScaledUp, trxOptions);
+ *   const trx = await ucore.borrow(Ucore.SXP, sxpScaledUp, trxOptions);
  * 
  *   console.log('Ethers.js transaction object', trx);
  * 
@@ -245,7 +245,7 @@ export async function borrow(
   options: CallOptions = {}
 ) : Promise<TrxResponse> {
   await netId(this);
-  const errorPrefix = 'Venus [borrow] | ';
+  const errorPrefix = 'Ucore [borrow] | ';
 
   const vTokenName = 'v' + asset;
   const vTokenAddress = address[this._network.name][vTokenName];
@@ -305,13 +305,13 @@ export async function borrow(
  * @example
  *
  * ```
- * const venus = new Venus(window.ethereum);
+ * const ucore = new Ucore(window.ethereum);
  * 
  * (async function() {
  * 
  *   console.log('Repaying SXP borrow...');
  *   const address = null; // set this to any address to repayBorrowBehalf
- *   const trx = await venus.repayBorrow(Venus.SXP, 32, address);
+ *   const trx = await ucore.repayBorrow(Ucore.SXP, 32, address);
  * 
  *   console.log('Ethers.js transaction object', trx);
  * 
@@ -326,7 +326,7 @@ export async function repayBorrow(
   options: CallOptions = {}
 ) : Promise<TrxResponse> {
   await netId(this);
-  const errorPrefix = 'Venus [repayBorrow] | ';
+  const errorPrefix = 'Ucore [repayBorrow] | ';
 
   const vTokenName = 'v' + asset;
   const vTokenAddress = address[this._network.name][vTokenName];

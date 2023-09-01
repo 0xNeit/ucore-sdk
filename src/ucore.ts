@@ -52,32 +52,32 @@ function toChecksumAddress(_address) {
 }
 
 /**
- * Get the balance of VENUS tokens held by an address.
+ * Get the balance of UCORE tokens held by an address.
  *
- * @param {string} _address The address in which to find the VENUS balance.
+ * @param {string} _address The address in which to find the UCORE balance.
  * @param {Provider | string} [_provider] An Ethers.js provider or valid network
  *     name string.
  *
- * @returns {string} Returns a string of the numeric balance of VENUS. The value
+ * @returns {string} Returns a string of the numeric balance of UCORE. The value
  *     is scaled up by 18 decimal places.
  *
  * @example
  *
  * ```
  * (async function () {
- *   const bal = await Venus.venus.getVenusBalance('0x2775b1c75658Be0F640272CCb8c72ac986009e38');
+ *   const bal = await Ucore.ucore.getUcoreBalance('0x2775b1c75658Be0F640272CCb8c72ac986009e38');
  *   console.log('Balance', bal);
  * })().catch(console.error);
  * ```
  */
-export async function getVenusBalance(
+export async function getUcoreBalance(
   _address: string,
   _provider : Provider | string='mainnet'
 ) : Promise<string> {
   const provider = await eth._createProvider({ provider: _provider });
   const net = await eth.getProviderNetwork(provider);
 
-  const errorPrefix = 'Venus [getVenusBalance] | ';
+  const errorPrefix = 'Ucore [getUcoreBalance] | ';
 
   if (typeof _address !== 'string') {
     throw Error(errorPrefix + 'Argument `_address` must be a string.');
@@ -101,32 +101,32 @@ export async function getVenusBalance(
 }
 
 /**
- * Get the amount of VENUS tokens accrued but not yet claimed by an address.
+ * Get the amount of UCORE tokens accrued but not yet claimed by an address.
  *
- * @param {string} _address The address in which to find the VENUS accrued.
+ * @param {string} _address The address in which to find the UCORE accrued.
  * @param {Provider | string} [_provider] An Ethers.js provider or valid network
  *     name string.
  *
- * @returns {string} Returns a string of the numeric accruement of VENUS. The
+ * @returns {string} Returns a string of the numeric accruement of UCORE. The
  *     value is scaled up by 18 decimal places.
  *
  * @example
  *
  * ```
  * (async function () {
- *   const acc = await Venus.venus.getVenusAccrued('0x4Ddc2D193948926D02f9B1fE9e1daa0718270ED5');
+ *   const acc = await Ucore.ucore.getUcoreAccrued('0x4Ddc2D193948926D02f9B1fE9e1daa0718270ED5');
  *   console.log('Accrued', acc);
  * })().catch(console.error);
  * ```
  */
-export async function getVenusAccrued(
+export async function getUcoreAccrued(
   _address: string,
   _provider : Provider | string='mainnet'
 ) : Promise<string> {
   const provider = await eth._createProvider({ provider: _provider });
   const net = await eth.getProviderNetwork(provider);
 
-  const errorPrefix = 'Venus [getVenusAccrued] | ';
+  const errorPrefix = 'Ucore [getUcoreAccrued] | ';
 
   if (typeof _address !== 'string') {
     throw Error(errorPrefix + 'Argument `_address` must be a string.');
@@ -152,7 +152,7 @@ export async function getVenusAccrued(
 }
 
 /**
- * Create a transaction to claim accrued VENUS tokens for the user.
+ * Create a transaction to claim accrued UCORE tokens for the user.
  *
  * @param {CallOptions} [options] Options to set for a transaction and Ethers.js
  *     method overrides.
@@ -163,18 +163,18 @@ export async function getVenusAccrued(
  * @example
  *
  * ```
- * const venus = new Venus(window.ethereum);
+ * const ucore = new Ucore(window.ethereum);
  * 
  * (async function() {
  * 
- *   console.log('Claiming Venus...');
- *   const trx = await venus.claimVenus();
+ *   console.log('Claiming Ucore...');
+ *   const trx = await ucore.claimUcore();
  *   console.log('Ethers.js transaction object', trx);
  * 
  * })().catch(console.error);
  * ```
  */
-export async function claimVenus(
+export async function claimUcore(
   options: CallOptions = {}
 ) : Promise<TrxResponse> {
   await netId(this);
@@ -192,18 +192,18 @@ export async function claimVenus(
       abi: abi.Comptroller,
     };
     const parameters = [ userAddress ];
-    const method = 'claimVenus(address)';
+    const method = 'claimUcore(address)';
 
     return eth.trx(controllerAddress, method, parameters, trxOptions);
   } catch(e) {
-    const errorPrefix = 'Venus [claimVenus] | ';
+    const errorPrefix = 'Ucore [claimUcore] | ';
     e.message = errorPrefix + e.message;
     return e;
   }
 }
 
 /**
- * Create a transaction to delegate Venus Governance voting rights to an
+ * Create a transaction to delegate Ucore Governance voting rights to an
  *     address.
  *
  * @param {string} _address The address in which to delegate voting rights to.
@@ -218,10 +218,10 @@ export async function claimVenus(
  * @example
  *
  * ```
- * const venus = new Venus(window.ethereum);
+ * const ucore = new Ucore(window.ethereum);
  * 
  * (async function() {
- *   const delegateTx = await venus.delegate('0xa0df350d2637096571F7A701CBc1C5fdE30dF76A');
+ *   const delegateTx = await ucore.delegate('0xa0df350d2637096571F7A701CBc1C5fdE30dF76A');
  *   console.log('Ethers.js transaction object', delegateTx);
  * })().catch(console.error);
  * ```
@@ -232,7 +232,7 @@ export async function delegate(
 ) : Promise<TrxResponse> {
   await netId(this);
 
-  const errorPrefix = 'Venus [delegate] | ';
+  const errorPrefix = 'Ucore [delegate] | ';
 
   if (typeof _address !== 'string') {
     throw Error(errorPrefix + 'Argument `_address` must be a string.');
@@ -257,11 +257,11 @@ export async function delegate(
 }
 
 /**
- * Delegate voting rights in Venus Governance using an EIP-712 signature.
+ * Delegate voting rights in Ucore Governance using an EIP-712 signature.
  *
  * @param {string} _address The address to delegate the user's voting rights to.
  * @param {number} nonce The contract state required to match the signature.
- *     This can be retrieved from the VENUS contract's public nonces mapping.
+ *     This can be retrieved from the UCORE contract's public nonces mapping.
  * @param {number} expiry The time at which to expire the signature. A block 
  *     timestamp as seconds since the unix epoch.
  * @param {object} signature An object that contains the v, r, and, s values of
@@ -277,10 +277,10 @@ export async function delegate(
  * @example
  *
  * ```
- * const venus = new Venus(window.ethereum);
+ * const ucore = new Ucore(window.ethereum);
  * 
  * (async function() {
- *   const delegateTx = await venus.delegateBySig(
+ *   const delegateTx = await ucore.delegateBySig(
  *     '0xa0df350d2637096571F7A701CBc1C5fdE30dF76A',
  *     42,
  *     9999999999,
@@ -303,7 +303,7 @@ export async function delegateBySig(
 ) : Promise<TrxResponse> {
   await netId(this);
 
-  const errorPrefix = 'Venus [delegateBySig] | ';
+  const errorPrefix = 'Ucore [delegateBySig] | ';
 
   if (typeof _address !== 'string') {
     throw Error(errorPrefix + 'Argument `_address` must be a string.');
@@ -347,7 +347,7 @@ export async function delegateBySig(
 }
 
 /**
- * Create a delegate signature for Venus Governance using EIP-712. The
+ * Create a delegate signature for Ucore Governance using EIP-712. The
  *     signature can be created without burning gas. Anyone can post it to the
  *     blockchain using the `delegateBySig` method, which does have gas costs.
  *
@@ -362,11 +362,11 @@ export async function delegateBySig(
  * @example
  *
  * ```
- * const venus = new Venus(window.ethereum);
+ * const ucore = new Ucore(window.ethereum);
  *
  * (async () => {
  *
- *   const delegateSignature = await venus.createDelegateSignature('0xa0df350d2637096571F7A701CBc1C5fdE30dF76A');
+ *   const delegateSignature = await ucore.createDelegateSignature('0xa0df350d2637096571F7A701CBc1C5fdE30dF76A');
  *   console.log('delegateSignature', delegateSignature);
  *
  * })().catch(console.error);
@@ -441,11 +441,11 @@ export async function createDelegateSignature(
  * @example
  *
  * ```
- * const venus = new Venus(window.ethereum);
+ * const ucore = new Ucore(window.ethereum);
  *
  * (async () => {
  * 
- *   const amount = await venus.getMintableVAI('0x4Ddc2D193948926D02f9B1fE9e1daa0718270ED5');
+ *   const amount = await ucore.getMintableVAI('0x4Ddc2D193948926D02f9B1fE9e1daa0718270ED5');
  *   console.log('MintableVAI amount', amount);
  *
  * })().catch(console.error);
@@ -455,7 +455,7 @@ export async function getMintableVAI(
   _address: string,
   options: CallOptions = {}
 ) : Promise<string> {
-  const errorPrefix = 'Venus [getMintableVAI] | ';
+  const errorPrefix = 'Ucore [getMintableVAI] | ';
 
   if (typeof _address !== 'string') {
     throw Error(errorPrefix + 'Argument `_address` must be a string.');
@@ -496,11 +496,11 @@ export async function getMintableVAI(
  * @example
  *
  * ```
- * const venus = new Venus(window.ethereum);
+ * const ucore = new Ucore(window.ethereum);
  *
  * (async () => {
  * 
- *   const rate = await venus.getVAIMintRate();
+ *   const rate = await ucore.getVAIMintRate();
  *   console.log('VAI mint rate', rate);
  *
  * })().catch(console.error);
@@ -533,11 +533,11 @@ export async function getVAIMintRate(
  * @example
  *
  * ```
- * const venus = new Venus(window.ethereum);
+ * const ucore = new Ucore(window.ethereum);
  *
  * (async () => {
  * 
- *   const _mintVAIGuardianPaused = await venus.mintVAIGuardianPaused();
+ *   const _mintVAIGuardianPaused = await ucore.mintVAIGuardianPaused();
  *   console.log('mintVAIGuardianPaused', _mintVAIGuardianPaused);
  *
  * })().catch(console.error);
@@ -570,11 +570,11 @@ export async function mintVAIGuardianPaused(
  * @example
  *
  * ```
- * const venus = new Venus(window.ethereum);
+ * const ucore = new Ucore(window.ethereum);
  *
  * (async () => {
  * 
- *   const _repayVAIGuardianPaused = await venus.repayVAIGuardianPaused();
+ *   const _repayVAIGuardianPaused = await ucore.repayVAIGuardianPaused();
  *   console.log('repayVAIGuardianPaused', _repayVAIGuardianPaused);
  *
  * })().catch(console.error);
@@ -609,11 +609,11 @@ export async function repayVAIGuardianPaused(
  * @example
  *
  * ```
- * const venus = new Venus(window.ethereum);
+ * const ucore = new Ucore(window.ethereum);
  *
  * (async () => {
  * 
- *   const amount = await venus.mintedVAIOf('0x4Ddc2D193948926D02f9B1fE9e1daa0718270ED5');
+ *   const amount = await ucore.mintedVAIOf('0x4Ddc2D193948926D02f9B1fE9e1daa0718270ED5');
  *   console.log('Minted VAI amount', amount);
  *
  * })().catch(console.error);
@@ -623,7 +623,7 @@ export async function mintedVAIOf(
   _address: string,
   options: CallOptions = {}
 ) : Promise<string> {
-  const errorPrefix = 'Venus [mintedVAIOf] | ';
+  const errorPrefix = 'Ucore [mintedVAIOf] | ';
 
   if (typeof _address !== 'string') {
     throw Error(errorPrefix + 'Argument `_address` must be a string.');
@@ -662,11 +662,11 @@ export async function mintedVAIOf(
  * @example
  *
  * ```
- * const venus = new Venus(window.ethereum);
+ * const ucore = new Ucore(window.ethereum);
  *
  * (async () => {
  * 
- *   const amount = await venus.mintedVAIs('0x4Ddc2D193948926D02f9B1fE9e1daa0718270ED5');
+ *   const amount = await ucore.mintedVAIs('0x4Ddc2D193948926D02f9B1fE9e1daa0718270ED5');
  *   console.log('Minted VAI amount', amount);
  *
  * })().catch(console.error);
@@ -676,7 +676,7 @@ export async function mintedVAIs(
   _address: string,
   options: CallOptions = {}
 ) : Promise<string> {
-  const errorPrefix = 'Venus [mintedVAIs] | ';
+  const errorPrefix = 'Ucore [mintedVAIs] | ';
 
   if (typeof _address !== 'string') {
     throw Error(errorPrefix + 'Argument `_address` must be a string.');
@@ -713,11 +713,11 @@ export async function mintedVAIs(
  * @example
  *
  * ```
- * const venus = new Venus(window.ethereum);
+ * const ucore = new Ucore(window.ethereum);
  *
  * (async () => {
  * 
- *   const vaiControllerAddress = await venus.vaiController();
+ *   const vaiControllerAddress = await ucore.vaiController();
  *   console.log('vaiControllerAddress', vaiControllerAddress);
  *
  * })().catch(console.error);
@@ -750,11 +750,11 @@ export async function vaiController(
  * @example
  *
  * ```
- * const venus = new Venus(window.ethereum);
+ * const ucore = new Ucore(window.ethereum);
  *
  * (async () => {
  * 
- *   const vaiMintRate = await venus.vaiMintRate();
+ *   const vaiMintRate = await ucore.vaiMintRate();
  *   console.log('vaiMintRate', vaiMintRate);
  *
  * })().catch(console.error);
@@ -775,7 +775,7 @@ export async function vaiMintRate(
 }
 
 /**
- * Mint VAI in the Venus Protocol.
+ * Mint VAI in the Ucore Protocol.
  *
  * @param {number | string | BigNumber} mintVAIAmount A string, number, or BigNumber
  *     object of the amount of an asset to mintVAI. Use the `mantissa` boolean in
@@ -790,14 +790,14 @@ export async function vaiMintRate(
  * @example
  *
  * ```
- * const venus = new Venus(window.ethereum);
+ * const ucore = new Ucore(window.ethereum);
  *
  * // const trxOptions = { gasLimit: 250000, mantissa: false };
  * 
  * (async function() {
  * 
- *   console.log('Minting VAI in the Venus Protocol...');
- *   const trx = await venus.mintVAI(1);
+ *   console.log('Minting VAI in the Ucore Protocol...');
+ *   const trx = await ucore.mintVAI(1);
  *   console.log('Ethers.js transaction object', trx);
  * 
  * })().catch(console.error);
@@ -808,7 +808,7 @@ export async function mintVAI(
   options: CallOptions = {}
 ) : Promise<TrxResponse> {
   await netId(this);
-  const errorPrefix = 'Venus [mintVAI] | ';
+  const errorPrefix = 'Ucore [mintVAI] | ';
 
   if (
     typeof mintVAIAmount !== 'number' &&
@@ -836,14 +836,14 @@ export async function mintVAI(
 
     return eth.trx(controllerAddress, 'mintVAI', parameters, trxOptions);
   } catch(e) {
-    const errorPrefix = 'Venus [mintVAI] | ';
+    const errorPrefix = 'Ucore [mintVAI] | ';
     e.message = errorPrefix + e.message;
     return e;
   }
 }
 
 /**
- * Repay VAI in the Venus Protocol.
+ * Repay VAI in the Ucore Protocol.
  *
  * @param {number | string | BigNumber} repayVAIAmount A string, number, or BigNumber
  *     object of the amount of an asset to repay. Use the `mantissa` boolean in
@@ -858,14 +858,14 @@ export async function mintVAI(
  * @example
  *
  * ```
- * const venus = new Venus(window.ethereum);
+ * const ucore = new Ucore(window.ethereum);
  *
  * // const trxOptions = { gasLimit: 250000, mantissa: false };
  * 
  * (async function() {
  * 
- *   console.log('Repaying VAI in the Venus Protocol...');
- *   const trx = await venus.repayVAI(1);
+ *   console.log('Repaying VAI in the Ucore Protocol...');
+ *   const trx = await ucore.repayVAI(1);
  *   console.log('Ethers.js transaction object', trx);
  * 
  * })().catch(console.error);
@@ -876,7 +876,7 @@ export async function repayVAI(
   options: CallOptions = {}
 ) : Promise<TrxResponse> {
   await netId(this);
-  const errorPrefix = 'Venus [mintVAI] | ';
+  const errorPrefix = 'Ucore [mintVAI] | ';
 
   if (
     typeof repayVAIAmount !== 'number' &&
@@ -904,7 +904,7 @@ export async function repayVAI(
 
     return eth.trx(controllerAddress, 'repayVAI', parameters, trxOptions);
   } catch(e) {
-    const errorPrefix = 'Venus [repayVAI] | ';
+    const errorPrefix = 'Ucore [repayVAI] | ';
     e.message = errorPrefix + e.message;
     return e;
   }

@@ -10,7 +10,7 @@ import { address, abi, cTokens } from './constants';
 import { CallOptions, TrxResponse } from './types';
 
 /**
- * Enters the user's address into Venus Protocol markets.
+ * Enters the user's address into Ucore Protocol markets.
  *
  * @param {any[]} markets An array of strings of markets to enter, meaning use
  *     those supplied assets as collateral.
@@ -24,10 +24,10 @@ import { CallOptions, TrxResponse } from './types';
  * @example
  *
  * ```
- * const venus = new Venus(window.ethereum);
+ * const ucore = new Ucore(window.ethereum);
  * 
  * (async function () {
- *   const trx = await venus.enterMarkets(Venus.SXP); // Use [] for multiple
+ *   const trx = await ucore.enterMarkets(Ucore.SXP); // Use [] for multiple
  *   console.log('Ethers.js transaction object', trx);
  * })().catch(console.error);
  * ```
@@ -37,7 +37,7 @@ export async function enterMarkets(
   options: CallOptions = {}
 ) : Promise<TrxResponse> {
   await netId(this);
-  const errorPrefix = 'Venus [enterMarkets] | ';
+  const errorPrefix = 'Ucore [enterMarkets] | ';
 
   if (typeof markets === 'string') {
     markets = [ markets ];
@@ -72,7 +72,7 @@ export async function enterMarkets(
 }
 
 /**
- * Exits the user's address from a Venus Protocol market.
+ * Exits the user's address from a Ucore Protocol market.
  *
  * @param {string} market A string of the symbol of the market to exit.
  * @param {CallOptions} [options] Call options and Ethers.js overrides for the 
@@ -85,10 +85,10 @@ export async function enterMarkets(
  * @example
  *
  * ```
- * const venus = new Venus(window.ethereum);
+ * const ucore = new Ucore(window.ethereum);
  * 
  * (async function () {
- *   const trx = await venus.exitMarket(Venus.SXP);
+ *   const trx = await ucore.exitMarket(Ucore.SXP);
  *   console.log('Ethers.js transaction object', trx);
  * })().catch(console.error);
  * ```
@@ -98,7 +98,7 @@ export async function exitMarket(
   options: CallOptions = {}
 ) : Promise<TrxResponse> {
   await netId(this);
-  const errorPrefix = 'Venus [exitMarkets] | ';
+  const errorPrefix = 'Ucore [exitMarkets] | ';
 
   if (typeof market !== 'string' || market === '') {
     throw Error(errorPrefix + 'Argument `market` must be a string of a cToken market name.');

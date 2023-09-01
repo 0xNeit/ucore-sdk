@@ -1,6 +1,6 @@
 /**
- * @file Venus
- * @desc This file defines the constructor of the `Venus` class.
+ * @file Ucore
+ * @desc This file defines the constructor of the `Ucore` class.
  * @hidden
  */
 
@@ -19,7 +19,7 @@ import { Provider, UcoreOptions, UcoreInstance } from './types';
 ethers.utils.Logger.setLogLevel(ethers.utils.Logger.levels.ERROR);
 
 /**
- * Creates an instance of the Venus.js SDK.
+ * Creates an instance of the Ucore.js SDK.
  *
  * @param {Provider | string} [provider] Optional Ethereum network provider.
  *     Defaults to Ethers.js fallback mainnet provider.
@@ -27,28 +27,28 @@ ethers.utils.Logger.setLogLevel(ethers.utils.Logger.levels.ERROR);
  *
  * @example
  * ```
- * var venus = new Venus(window.ethereum); // web browser
+ * var ucore = new Ucore(window.ethereum); // web browser
  * 
- * var venus = new Venus('http://127.0.0.1:8545'); // HTTP provider
+ * var ucore = new Ucore('http://127.0.0.1:8545'); // HTTP provider
  * 
- * var venus = new Venus(); // Uses Ethers.js fallback mainnet (for testing only)
+ * var ucore = new Ucore(); // Uses Ethers.js fallback mainnet (for testing only)
  * 
- * var venus = new Venus('testnet'); // Uses Ethers.js fallback (for testing only)
+ * var ucore = new Ucore('testnet'); // Uses Ethers.js fallback (for testing only)
  * 
  * // Init with private key (server side)
- * var venus = new Venus('https://mainnet.infura.io/v3/_your_project_id_', {
+ * var ucore = new Ucore('https://mainnet.infura.io/v3/_your_project_id_', {
  *   privateKey: '0x_your_private_key_', // preferably with environment variable
  * });
  * 
  * // Init with HD mnemonic (server side)
- * var venus = new Venus('mainnet' {
+ * var ucore = new Ucore('mainnet' {
  *   mnemonic: 'clutch captain shoe...', // preferably with environment variable
  * });
  * ```
  *
- * @returns {object} Returns an instance of the Venus.js SDK.
+ * @returns {object} Returns an instance of the Ucore.js SDK.
  */
-const Venus = function(
+const Ucore = function(
   provider: Provider | string = 'mainnet', options: UcoreOptions = {}
 ) : UcoreInstance {
   const originalProvider = provider;
@@ -64,7 +64,7 @@ const Venus = function(
     ...vToken,
     ...priceFeed,
     ...gov,
-    claimVenus: comp.claimVenus,
+    claimUcore: comp.claimUcore,
     delegate: comp.delegate,
     delegateBySig: comp.delegateBySig,
     createDelegateSignature: comp.createDelegateSignature,
@@ -95,14 +95,14 @@ const Venus = function(
   return instance;
 };
 
-Venus.eth = eth;
-Venus.util = util;
-Venus._ethers = ethers;
-Venus.decimals = decimals;
-Venus.venus = {
-  getVenusBalance: comp.getVenusBalance,
-  getVenusAccrued: comp.getVenusAccrued,
+Ucore.eth = eth;
+Ucore.util = util;
+Ucore._ethers = ethers;
+Ucore.decimals = decimals;
+Ucore.ucore = {
+  getUcoreBalance: comp.getUcoreBalance,
+  getUcoreAccrued: comp.getUcoreAccrued,
 };
-Object.assign(Venus, constants);
+Object.assign(Ucore, constants);
 
-export = Venus;
+export = Ucore;
