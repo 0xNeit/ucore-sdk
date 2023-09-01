@@ -1,6 +1,6 @@
 {
   "name": "ucore-sdk",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A JavaScript SDK for the Unity Core Protocol.",
   "main": "dist/nodejs/index.js",
   "license": "MIT",
