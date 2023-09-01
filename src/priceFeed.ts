@@ -7,7 +7,7 @@
 import * as eth from './eth';
 import { netId } from './helpers';
 import {
-  constants, address, abi, cTokens, underlyings, decimals, opfAssets
+  constants, address, abi, vTokens, underlyings, decimals, opfAssets
 } from './constants';
 import { BigNumber } from '@ethersproject/bignumber/lib/bignumber';
 import { CallOptions } from './types';
@@ -30,7 +30,7 @@ function validateAsset(
   const underlyingAddress = address[this._network.name][underlyingName];
 
   if (
-    (!cTokens.includes(vTokenName) || !underlyings.includes(underlyingName)) &&
+    (!vTokens.includes(vTokenName) || !underlyings.includes(underlyingName)) &&
     !opfAssets.includes(underlyingName)
   ) {
     throw Error(errorPrefix + 'Argument `' + argument + '` is not supported.');
@@ -108,11 +108,11 @@ export async function getPrice(
   ] = validateAsset.bind(this)(inAsset, 'inAsset', errorPrefix);
 
   // const priceFeedAddress = address[this._network.name].PriceFeed;
-  const controllerAddress = address[this._network.name].Comptroller;
+  const controllerAddress = address[this._network.name].Controller;
 
   const oracleTrxOptions: CallOptions = {
     _ucoreProvider: this._provider,
-    abi: abi.Comptroller,
+    abi: abi.Controller,
   };
   const priceOracleAddress = await eth.read(controllerAddress, 'oracle', [], oracleTrxOptions);
 

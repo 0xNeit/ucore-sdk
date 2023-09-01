@@ -8,7 +8,7 @@ import { ethers } from 'ethers';
 import * as eth from './eth';
 import { netId } from './helpers';
 import {
-  constants, address, abi, decimals, underlyings, cTokens
+  constants, address, abi, decimals, underlyings, vTokens
 } from './constants';
 import { BigNumber } from '@ethersproject/bignumber/lib/bignumber';
 import { CallOptions, TrxResponse } from './types';
@@ -174,7 +174,7 @@ export async function redeem(
 
   const underlyingName = assetIsVToken ? asset.slice(1, asset.length) : asset;
 
-  if (!cTokens.includes(vTokenName) || !underlyings.includes(underlyingName)) {
+  if (!vTokens.includes(vTokenName) || !underlyings.includes(underlyingName)) {
     throw Error(errorPrefix + 'Argument `asset` is not supported.');
   }
 

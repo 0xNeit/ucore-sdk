@@ -1,12 +1,12 @@
 /**
- * @file Comptroller
- * @desc These methods facilitate interactions with the Comptroller smart
+ * @file Controller
+ * @desc These methods facilitate interactions with the Controller smart
  *     contract.
  */
 
 import * as eth from './eth';
 import { netId } from './helpers';
-import { address, abi, cTokens } from './constants';
+import { address, abi, vTokens } from './constants';
 import { CallOptions, TrxResponse } from './types';
 
 /**
@@ -53,18 +53,18 @@ export async function enterMarkets(
       markets[i] = 'v' + markets[i];
     }
 
-    if (!cTokens.includes(markets[i])) {
+    if (!vTokens.includes(markets[i])) {
       throw Error(errorPrefix + 'Provided market `' + markets[i] + '` is not a recognized vToken.');
     }
 
     addresses.push(address[this._network.name][markets[i]]);
   }
-  const controllerAddress = address[this._network.name].Comptroller;
+  const controllerAddress = address[this._network.name].Controller;
   const parameters = [ addresses ];
 
   const trxOptions: CallOptions = {
     _ucoreProvider: this._provider,
-    abi: abi.Comptroller,
+    abi: abi.Controller,
     ...options
   };
 
@@ -101,25 +101,25 @@ export async function exitMarket(
   const errorPrefix = 'Ucore [exitMarkets] | ';
 
   if (typeof market !== 'string' || market === '') {
-    throw Error(errorPrefix + 'Argument `market` must be a string of a cToken market name.');
+    throw Error(errorPrefix + 'Argument `market` must be a string of a vToken market name.');
   }
 
   if (market[0] !== 'v') {
     market = 'v' + market;
   }
 
-  if (!cTokens.includes(market)) {
-    throw Error(errorPrefix + 'Provided market `' + market + '` is not a recognized cToken.');
+  if (!vTokens.includes(market)) {
+    throw Error(errorPrefix + 'Provided market `' + market + '` is not a recognized vToken.');
   }
 
-  const cTokenAddress = address[this._network.name][market];
+  const vTokenAddress = address[this._network.name][market];
 
-  const controllerAddress = address[this._network.name].Comptroller;
-  const parameters = [ cTokenAddress ];
+  const controllerAddress = address[this._network.name].Controller;
+  const parameters = [ vTokenAddress ];
 
   const trxOptions: CallOptions = {
     _ucoreProvider: this._provider,
-    abi: abi.Comptroller,
+    abi: abi.Controller,
     ...options
   };
 

@@ -10,7 +10,7 @@ import * as util from './util';
 import * as controller from './controller';
 import * as vToken from './vToken';
 import * as priceFeed from './priceFeed';
-import * as comp from './ucore';
+import * as ucore from './ucore';
 import * as gov from './gov';
 import { constants, decimals } from './constants';
 import { Provider, UcoreOptions, UcoreInstance } from './types';
@@ -64,20 +64,20 @@ const Ucore = function(
     ...vToken,
     ...priceFeed,
     ...gov,
-    claimUcore: comp.claimUcore,
-    delegate: comp.delegate,
-    delegateBySig: comp.delegateBySig,
-    createDelegateSignature: comp.createDelegateSignature,
-    getMintableVAI: comp.getMintableVAI,
-    getVAIMintRate: comp.getVAIMintRate,
-    mintVAIGuardianPaused: comp.mintVAIGuardianPaused,
-    repayVAIGuardianPaused: comp.repayVAIGuardianPaused,
-    mintedVAIOf: comp.mintedVAIOf,
-    mintedVAIs: comp.mintedVAIs,
-    vaiController: comp.vaiController,
-    vaiMintRate: comp.vaiMintRate,
-    mintVAI: comp.mintVAI,
-    repayVAI: comp.repayVAI,
+    claimUcore: ucore.claimUcore,
+    delegate: ucore.delegate,
+    delegateBySig: ucore.delegateBySig,
+    createDelegateSignature: ucore.createDelegateSignature,
+    getMintableUAI: ucore.getMintableUAI,
+    getUAIMintRate: ucore.getUAIMintRate,
+    mintUAIGuardianPaused: ucore.mintUAIGuardianPaused,
+    repayUAIGuardianPaused: ucore.repayUAIGuardianPaused,
+    mintedUAIOf: ucore.mintedUAIOf,
+    mintedUAIs: ucore.mintedUAIs,
+    uaiController: ucore.uaiController,
+    uaiMintRate: ucore.uaiMintRate,
+    mintUAI: ucore.mintUAI,
+    repayUAI: ucore.repayUAI,
   };
 
   // Instance needs to know which network the provider connects to, so it can
@@ -100,8 +100,8 @@ Ucore.util = util;
 Ucore._ethers = ethers;
 Ucore.decimals = decimals;
 Ucore.ucore = {
-  getUcoreBalance: comp.getUcoreBalance,
-  getUcoreAccrued: comp.getUcoreAccrued,
+  getUcoreBalance: ucore.getUcoreBalance,
+  getUcoreAccrued: ucore.getUcoreAccrued,
 };
 Object.assign(Ucore, constants);
 
