@@ -4,7 +4,7 @@ import commonjs from 'rollup-plugin-commonjs';
 import minify from 'rollup-plugin-babel-minify';
 import json from '@rollup/plugin-json';
 
-const BrowserBuildPath = './dist/browser/venus.min.js';
+const BrowserBuildPath = './dist/browser/ucore.min.js';
 
 export default [{
   input: './dist/nodejs/index.js',
@@ -12,7 +12,7 @@ export default [{
     if (message.code === 'MISSING_NODE_BUILTINS') return;
   },
   output: {
-    name: 'Venus',
+    name: 'Ucore',
     file: BrowserBuildPath,
     format: 'iife',
     sourcemap: false,
@@ -29,7 +29,7 @@ export default [{
       browser: true,
     }),
     commonjs({
-      namedExports: { Venus: ['Venus'] },
+      namedExports: { Ucore: ['Ucore'] },
     }),
     minify({ comments: false }),
     json(),
