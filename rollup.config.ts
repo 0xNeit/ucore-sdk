@@ -8,6 +8,7 @@ const BrowserBuildPath = './dist/browser/ucore.min.js';
 
 export default [{
   input: './dist/nodejs/index.js',
+  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
   onwarn: (message) => {
     if (message.code === 'MISSING_NODE_BUILTINS') return;
   },
@@ -24,6 +25,8 @@ export default [{
   plugins: [
     resolve({
       preferBuiltins: true,
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
       jsnext: true,
       main: true,
       browser: true,

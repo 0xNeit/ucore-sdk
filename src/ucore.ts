@@ -147,7 +147,7 @@ export async function getUcoreAccrued(
     abi: abi.UcoreLens,
   };
 
-  const result = await eth.read(lensAddress, 'getXVSBalanceMetadataExt', parameters, trxOptions);
+  const result = await eth.read(lensAddress, 'getUCOREBalanceMetadataExt', parameters, trxOptions);
   return result.allocated.toString();
 }
 

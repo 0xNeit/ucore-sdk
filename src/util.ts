@@ -212,6 +212,8 @@ export function getAbi(contract: string): AbiType[] {
  * console.log('testnet : ', Ucore.util.getNetNameWithChainId(97));
  * ```
  */
+
+// TODO: Add Core Network IDs
 export function getNetNameWithChainId(chainId: number) : string {
   const networks = {
     1: 'mainnet',
